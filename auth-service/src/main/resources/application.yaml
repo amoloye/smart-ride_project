@@ -1,0 +1,36 @@
+
+# Port to use from the client
+server:
+  port: 9000
+
+# Connection to PostgreSQL database
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_ride
+    username: amoloye
+    password: adegboola
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+#Logging
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+
+# swagger
+springdoc:
+  swagger-ui:
+    use-root-path: true
+    path: /swagger.html
+  api-docs:
+    path: /docs
