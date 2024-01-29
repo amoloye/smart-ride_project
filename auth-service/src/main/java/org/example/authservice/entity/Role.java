@@ -1,7 +1,8 @@
 package org.example.authservice.entity;
 
 public enum Role {
-
-    USER,
-    ADMIN
+    ADMIN,
+    CAB_DRIVER,
+    PASSENGER
 }
+

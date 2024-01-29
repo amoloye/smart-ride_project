@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService{
+public class AuthenticationService {
 
     private final UserRepository userRepository;
 
@@ -28,18 +28,16 @@ public class AuthenticationService{
 
     private final JWTService jwtService;
 
-    public User signup(SignUpRequest signUpRequest) {
+    public User signup(SignUpRequest signUpRequest, Role role) {
         User user = new User();
 
         user.setEmail(signUpRequest.getEmail());
         user.setFirstname(signUpRequest.getFirstName());
-        user.setRole(Role.USER);
+        user.setRole(role); // Set the role based on the provided argument
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         return userRepository.save(user);
-
     }
-
 
     public JwtAuthenticationResponse signin(SigninRequest signinRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getEmail(),
@@ -63,7 +61,7 @@ public class AuthenticationService{
         String userEmail = jwtService.extractUserName(refreshTokenRequest.getToken());
         User user = userRepository.findByEmail(userEmail).orElseThrow();
 
-        if(jwtService.isTokenValid(refreshTokenRequest.getToken(), user)){
+        if (jwtService.isTokenValid(refreshTokenRequest.getToken(), user)) {
             var jwt = jwtService.generateToken(user);
 
             JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
@@ -72,10 +70,8 @@ public class AuthenticationService{
             jwtAuthenticationResponse.setRefreshToken(refreshTokenRequest.getToken());
 
             return jwtAuthenticationResponse;
-
         }
 
         return null;
-
     }
 }
