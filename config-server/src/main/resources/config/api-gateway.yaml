@@ -15,7 +15,12 @@ spring:
         - id: auth-service
           uri: lb://auth-service
           predicates:
-            - Path=/employee/**
+            - Path=/auth/**
+        - id: cab_user-service
+          uri: lb://cab_user-service
+          predicates:
+            - Path=/cab_user/**
+
 
 management:
   tracing:

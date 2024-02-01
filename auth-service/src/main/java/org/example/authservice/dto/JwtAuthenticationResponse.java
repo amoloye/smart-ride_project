@@ -10,5 +10,8 @@ public class JwtAuthenticationResponse {
 
     private String refreshToken;
 
+    private String role;  // Add a field to store the user's role
+
+    // Constructors, getters, and setters
 
 }

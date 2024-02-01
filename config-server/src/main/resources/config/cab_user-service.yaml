@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+##this help with log and tracing using zipkin which we connected using docker and exposed localhost:9431 server port
+management:
+  tracing:
+    sampling:
+      probability: 1.0
